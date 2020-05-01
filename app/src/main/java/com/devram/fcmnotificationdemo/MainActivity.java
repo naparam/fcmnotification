@@ -8,24 +8,29 @@ import com.devram.fcmnotification.FcmNotificationSDK;
 import com.devram.fcmnotification.fcm.FcmObserver;
 import com.devram.fcmnotification.fcm.FcmViewModel;
 
+/**
+ * MainActivity is use for Demo purpose
+ */
 public class MainActivity extends AppCompatActivity {
-    FcmViewModel fcmViewModel = new FcmViewModel();
-    private String fcmToken = null;
+    private static String TAG = "MainActivity";
+
+    private FcmViewModel fcmViewModel;
+    private String fcmToken;
+
     private FcmObserver observer = new FcmObserver() {
         @Override
         public void getSubscriptionToken(String token) {
-            fcmToken =token;
-            Log.e("MainActivity","TOKEN ==========>"+fcmToken);
+            DataManagerFcm.getInstance(getApplicationContext()).storeFcmToken(token);
         }
 
         @Override
         public void getSubscriptionStatus(boolean isFcmRegistered) {
-            Log.e("MainActivity","FcmRegistered ==========>"+isFcmRegistered);
+            Log.e(TAG,"is FcmRegistered "+isFcmRegistered);
         }
 
         @Override
         public void getPermissionStatus(boolean isPermission) {
-            Log.e("MainActivity","Permission ==========>"+isPermission);
+            Log.e(TAG,"is Permission "+isPermission);
         }
     };
 
@@ -33,8 +38,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        fcmViewModel = new FcmViewModel();
         FcmNotificationSDK.getInstance().setObserver(observer);
-        fcmViewModel.getFcmRegistereToken();
-        Log.e("MainActivity","TOKEN ==========>"+fcmToken);
+        fcmToken = DataManagerFcm.getInstance(FcmNotificationSDK.getInstance().getContext()).getToken();
+        if (fcmToken == null) {
+            fcmViewModel.getFcmRegistereToken();
+        }
+
     }
 }

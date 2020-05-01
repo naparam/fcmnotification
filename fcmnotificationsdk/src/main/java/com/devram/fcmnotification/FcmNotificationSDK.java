@@ -3,6 +3,9 @@ package com.devram.fcmnotification;
 import android.content.Context;
 import com.devram.fcmnotification.fcm.FcmObserver;
 
+/**
+ * FcmNotificationSDK is a singleton class to init a FCMNotification Sdk
+ */
 public class FcmNotificationSDK {
 
     private Context context;

@@ -10,12 +10,13 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.SystemClock;
-
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
-
 import com.devram.fcmnotification.R;
 
+/**
+ * FcmNotificationManager class is used to create Notification builder
+ */
 public class FcmNotificationManager {
     private FcmNotificationManager() {
         //intentionally left blank

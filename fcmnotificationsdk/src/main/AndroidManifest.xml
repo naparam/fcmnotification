@@ -10,7 +10,9 @@
 
         <service
             android:name=".fcm.FcmService"
-            android:exported="false">
+            android:enabled="true"
+            android:exported="true"
+            tools:ignore="ExportedService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
