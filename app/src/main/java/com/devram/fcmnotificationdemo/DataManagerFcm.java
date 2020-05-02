@@ -3,14 +3,15 @@ package com.devram.fcmnotificationdemo;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.devram.fcmnotification.fcm.FcmConstants;
-
 /**
  * save the fcm token locally for use next time when app is launch again
  */
 public class DataManagerFcm {
     private static Context mCtx;
     private static DataManagerFcm mInstance;
+
+    public static final String SHARED_PREF_NAME = "fcmsharedpref";
+    public static final String KEY_ACCESS_TOKEN = "token";
 
     private DataManagerFcm(Context context){
         mCtx = context;
@@ -23,14 +24,14 @@ public class DataManagerFcm {
     }
 
     public boolean storeFcmToken(String token){
-        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(FcmConstants.SHARED_PREF_NAME,Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME,Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(FcmConstants.KEY_ACCESS_TOKEN,token);
+        editor.putString(KEY_ACCESS_TOKEN,token);
         editor.apply();
         return true;
     }
     public String getToken(){
-        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(FcmConstants.SHARED_PREF_NAME,Context.MODE_PRIVATE);
-        return sharedPreferences.getString(FcmConstants.KEY_ACCESS_TOKEN,null);
+        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME,Context.MODE_PRIVATE);
+        return sharedPreferences.getString(KEY_ACCESS_TOKEN,null);
     }
 }

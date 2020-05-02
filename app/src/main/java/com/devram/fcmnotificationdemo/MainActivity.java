@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         fcmViewModel = new FcmViewModel();
         FcmNotificationSDK.getInstance().setObserver(observer);
-        fcmToken = DataManagerFcm.getInstance(FcmNotificationSDK.getInstance().getContext()).getToken();
+        fcmToken = DataManagerFcm.getInstance(getApplicationContext()).getToken();
         if (fcmToken == null) {
             fcmViewModel.getFcmRegistereToken();
         }
